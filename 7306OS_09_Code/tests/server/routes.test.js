@@ -2,40 +2,40 @@
 /* jshint node:true */
 'use strict';
 
-var home = require('../../controllers/home'),
+const home = require('../../controllers/home'),
     image = require('../../controllers/image'),
     routes = require('../../server/routes');
     
-describe('Routes', function(){
+describe('Routes', ()=>{
     var app = {
         get: sinon.spy(),
         post: sinon.spy(),
         delete: sinon.spy()
     };
-    beforeEach(function(){
+    beforeEach(()=>{
         routes.initialize(app);
     });
-    describe('GETs', function() {
-        it('should handle /', function(){ 
+    describe('GETs', ()=>{
+        it('should handle /', ()=>{ 
             expect(app.get).to.be.calledWith('/', home.index);
         });
-        it('should handle /images/:image_id', function(){
+        it('should handle /images/:image_id', ()=>{
             expect(app.get).to.be.calledWith('/images/:image_id', image.index);
         });
     });
-    describe('POSTs', function() {
-        it('should handle /images', function(){
+    describe('POSTs', ()=>{
+        it('should handle /images', ()=>{
             expect(app.post).to.be.calledWith('/images', image.create);
         });
-        it('should handle /images/:image_id/like', function(){
+        it('should handle /images/:image_id/like', ()=>{
             expect(app.post).to.be.calledWith('/images/:image_id/like', image.like);
         });
-        it('should handle /images/:image_id/comment', function(){
+        it('should handle /images/:image_id/comment', ()=>{
             expect(app.post).to.be.calledWith('/images/:image_id/comment', image.comment);
         });
     });
-    describe('DELETEs', function() {
-        it('should handle /images/:image_id', function(){
+    describe('DELETEs', ()=>{
+        it('should handle /images/:image_id', ()=>{
             expect(app.delete).to.be.calledWith('/images/:image_id', image.remove);
         });
     });

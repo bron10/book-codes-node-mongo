@@ -3,7 +3,7 @@
 'use strict';
 
 var proxyquire, expressStub, configStub, mongooseStub, app,
-    server = function() {
+    server = function(){
         proxyquire('../../server', {
             'express': expressStub,
             './server/configure': configStub,
@@ -11,8 +11,8 @@ var proxyquire, expressStub, configStub, mongooseStub, app,
         });
     };
 
-describe('Server', function() {
-    beforeEach(function(){
+describe('Server', ()=>{
+    beforeEach(()=>{
         proxyquire = require('proxyquire'),
         app = {
             set: sinon.spy(),
@@ -31,40 +31,40 @@ describe('Server', function() {
         delete process.env.PORT;
     });
 
-    describe('Bootstrapping', function(){
-        it('should create the app', function(){
+    describe('Bootstrapping', ()=>{
+        it('should create the app', ()=>{
             server();
             expect(expressStub).to.be.called;
         });
-        it('should set the views', function(){
+        it('should set the views', ()=>{
             server();
             expect(app.set.secondCall.args[0]).to.equal('views');
         });
-        it('should configure the app', function(){
+        it('should configure the app', ()=>{
             server();
             expect(configStub).to.be.calledWith(app);
         });
-        it('should connect with mongoose', function(){
+        it('should connect with mongoose', ()=>{
             server();
             expect(mongooseStub.connect).to.be.calledWith(sinon.match.string);
         });
-        it('should launch the app', function(){
+        it('should launch the app', ()=>{
             server();
             expect(app.get).to.be.calledWith('port');
             expect(app.listen).to.be.calledWith(3300, sinon.match.func);
         });
     });
 
-    describe('Port', function(){
-        it('should be set', function() {
+    describe('Port', ()=>{
+        it('should be set', ()=>{
             server();
             expect(app.set.firstCall.args[0]).to.equal('port');
         });
-        it('should default to 3300', function() {
+        it('should default to 3300', ()=>{
             server();
             expect(app.set.firstCall.args[1]).to.equal(3300);
         });
-        it('should be configurable', function() {
+        it('should be configurable', ()=>{
             process.env.PORT = '5500';
             server();
             expect(app.set.firstCall.args[1]).to.equal('5500');

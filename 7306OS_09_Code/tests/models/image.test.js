@@ -4,10 +4,10 @@
 
 var ImageModel = require('../../models/image');
 
-describe('Image Model', function() {
+describe('Image Model', ()=>{
     var image;
 
-    beforeEach(function(){
+    beforeEach(()=>{
         image = new ImageModel({
             title: 'Test',
             description: 'Testing',
@@ -15,39 +15,39 @@ describe('Image Model', function() {
         });
     });
 
-    it('should have a mongoose schema', function(){
+    it('should have a mongoose schema', ()=>{
         expect(ImageModel.schema).to.be.defined;
     });
 
-    describe('Schema', function() {
-        it('should have a title string', function(){
+    describe('Schema', ()=>{
+        it('should have a title string', ()=>{
             expect(image.title).to.be.defined;
         });
-        it('should have a description string', function(){
+        it('should have a description string', ()=>{
             expect(image.description).to.be.defined;
         });
-        it('should have a filename string', function(){
+        it('should have a filename string', ()=>{
             expect(image.filename).to.be.defined;
         });
-        it('should have a views number default to 0', function(){
+        it('should have a views number default to 0', ()=>{
             expect(image.views).to.be.defined;
             expect(image.views).to.equal(0);
         });
-        it('should have a likes number default to 0', function(){
+        it('should have a likes number default to 0', ()=>{
             expect(image.likes).to.be.defined;
             expect(image.likes).to.equal(0);
         });
-        it('should have a timestamp date', function(){
+        it('should have a timestamp date', ()=>{
             expect(image.timestamp).to.be.defined;
         });
     });
 
-    describe('Virtuals', function(){
-        describe('uniqueId', function(){
-            it('should be defined', function(){
+    describe('Virtuals', ()=>{
+        describe('uniqueId', ()=>{
+            it('should be defined', ()=>{
                 expect(image.uniqueId).to.be.defined;
             });
-            it('should get filename without extension', function(){
+            it('should get filename without extension', ()=>{
                 expect(image.uniqueId).to.equal('testfile');
             });
         });
